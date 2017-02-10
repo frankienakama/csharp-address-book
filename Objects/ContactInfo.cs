@@ -13,12 +13,12 @@ namespace AddressBook.Objects
     private int _id;
     private static List<Contact> _instances = new List<Contact>{};
 
-    public Contact (string contactName, string contactPhoneNumber, string contactAddress)
+    public ContactInfo(string contactName, string contactPhoneNumber, string contactAddress)
     {
       _contactName = contactName;
       _contactPhoneNumber = contactPhoneNumber;
       _contactAddress = contactAddress;
-      _instances.Add(this);
+      // _instances.Add(this);
       _id = _instances.Count;
     }
     public string GetContactName()
@@ -63,7 +63,6 @@ namespace AddressBook.Objects
     public static Contact Find(int searchId)
     {
       return _instances[searchId - 1];
-    }
     }
   }
 }
