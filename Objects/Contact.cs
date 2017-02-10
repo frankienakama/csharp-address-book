@@ -13,7 +13,7 @@ namespace AddressBook.Objects
     private string _contactAddress;
     private List<ContactInfo> _contactInfo;
 
-    public Contact(string ContactName)
+    public Contact(string contactName)
     {
       _contactName = ContactName;
       _instances.Add(this);
