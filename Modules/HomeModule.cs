@@ -15,10 +15,10 @@ namespace AddressBook
       Get["/contact/add"] = _ => {
         return View["add_a_new_contact.cshtml"];
       };
-      Post["/contact/add"] = _ => {
-        var addContact = new Contact(Request.Form["new-contact"]);
-        return View["new_contact_confirmation.cshtml"];
-      };
+      // Post["/contact/add"] = _ => {
+      //   var addContact = new Contact(Request.Form["new-contact"]);
+      //   return View["new_contact_confirmation.cshtml"];
+      // };
       Post["/"] = _ => {
         var newContact = new Contact(Request.Form["new-contact"]);
         var allContacts = Contact.GetAll();
@@ -34,7 +34,7 @@ namespace AddressBook
       };
       Post["/contact/new"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        Contact selectedContact = Contact.Find(Request.Form["new-contact"]);
+        string selectedContact = Contact.Find(Request.Form["new-contact"]);
         List<Contact> currentContact = selectedContact.GetAddressBookEntries();
         string newContactInfo = Request.Form["new-contact"];
         Contact newContact = new Contact(newContactInfo);
