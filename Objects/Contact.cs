@@ -11,14 +11,15 @@ namespace AddressBook.Objects
     private string _contactName;
     private string _contactPhoneNumber;
     private string _contactAddress;
-    private List<ContactInfo> _contactInfo;
+    private int _id;
+    private List<Contact> _contactInfo;
 
     public Contact(string contactName)
     {
-      _contactName = ContactName;
+      _contactName = contactName;
       _instances.Add(this);
       _id = _instances.Count;
-      _contactInfo = new List<ContactInfo>{};
+      _contactInfo = new List<Contact>{};
     }
 
     public string GetContactName()
@@ -33,11 +34,11 @@ namespace AddressBook.Objects
     {
       return _contactAddress;
     }
-    public List<ContactInfo> GetAddressBookEntries()
+    public List<Contact> GetAddressBookEntries()
     {
-      return _contactInfo
+      return _contactInfo;
     }
-    public void AddAddressBookEntry(ContactInfo contact)
+    public void AddAddressBookEntry(Contact contact)
     {
       _contactInfo.Add(contact);
     }

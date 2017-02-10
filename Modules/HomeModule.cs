@@ -31,13 +31,13 @@ namespace AddressBook
       Post["/contact/new"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Contact selectedContact = Contact.Find(Request.Form["new-contact"]);
-        List<ContactInfo> contactInfo = selectedContact.GetContact();
+        List<Contact> currentContact = selectedContact.GetAddressBookEntries();
         string newContactInfo = Request.Form["new-contact"];
-        ContactInfo newContact = new Contact(newContactInfo);
+        Contact newContact = new Contact(newContactInfo);
         currentContact.Add(newContact);
         model.Add("contact", currentContact);
         model.Add("currentContactInfo", selectedContact);
-        return view["new_contact_confirmation.cshtml"];
+        return View["new_contact_confirmation.cshtml"];
       };
     }
   }
