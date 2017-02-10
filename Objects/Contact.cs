@@ -1,5 +1,3 @@
-
-using Nancy;
 using System.Collections.Generic;
 
 namespace AddressBook.Objects
@@ -48,7 +46,7 @@ namespace AddressBook.Objects
       return _id;
     }
 
-//
+////////////////////////////////////////////////////////////
 
     public static List<Contact> GetAll()
     {
