@@ -32,16 +32,16 @@ namespace AddressBook
         model.Add("currentContactInfo", currentContact);
         return View["index.cshtml", model];
       };
-      Post["/contact/new"] = _ => {
+      Post["/"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        string selectedContact = Contact.Find(Request.Form["new-contact"]);
+        Contact selectedContact = Contact.Find(Request.Form["new-contact"]);
         List<Contact> currentContact = selectedContact.GetAddressBookEntries();
         string newContactInfo = Request.Form["new-contact"];
         Contact newContact = new Contact(newContactInfo);
         currentContact.Add(newContact);
         model.Add("contact", currentContact);
         model.Add("currentContactInfo", selectedContact);
-        return View["new_contact_confirmation.cshtml"];
+        return View["index.cshtml"];
       };
     }
   }
