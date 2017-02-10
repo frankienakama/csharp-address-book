@@ -12,36 +12,36 @@ namespace AddressBook
         return View["index.cshtml"];
       };
       Get["/contacts"] = _ => {
-        var allCategories = Category.GetAll();
-        return View["contacts.cshtml", allCategories];
+        var allContacts = Contact.GetAll();
+        return View["contacts.cshtml", allContacts];
       };
       Get["/contacts/new"] = _ => {
         return View["add_contact.cshtml"];
       };
       Post["/contacts"] = _ => {
-        var newCategory = new Category(Request.Form["add-contact"]);
-        var allCategories = Category.GetAll();
-        return View["contacts.cshtml", allCategories];
+        var newContact = new Contact(Request.Form["add-contact"]);
+        var allContacts = Contact.GetAll();
+        return View["contacts.cshtml", allContacts];
       };
       Get["/contacts/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        var selectedCategory = Category.Find(parameters.id);
-        var categoryTasks = selectedCategory.GetTasks();
-        model.Add("category", selectedCategory);
-        model.Add("tasks", categoryTasks);
+        var selectedContact = Contact.Find(parameters.id);
+        var getCotact = selectedContact.GetInfo();
+        model.Add("contact", selectedContact);
+        model.Add("input", getCotact);
         return View["contact.cshtml", model];
       };
-      Post["/contact_info"] = _ => {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-        Category selectedCategory = Category.Find(Request.Form["category-id"]);
-        List<Task> categoryTasks = selectedCategory.GetTasks();
-        string taskDescription = Request.Form["task-description"];
-        Task newTask = new Task(taskDescription);
-        categoryTasks.Add(newTask);
-        model.Add("tasks", categoryTasks);
-        model.Add("category", selectedCategory);
-        return View["contact.cshtml", model];
-      };
+      // Post["/contact_info"] = _ => {
+      //   Dictionary<string, object> model = new Dictionary<string, object>();
+      //   Contact selectedContact = Contact.Find(Request.Form["category-id"]);
+      //   List<ContactInfo> getCotact = selectedContact.GetInfo();
+      //   string contactDescription = Request.Form["task-description"];
+      //   ContactInfo newTask = new ContactInfo(contactDescription);
+      //   getCotact.Add(newTask);
+      //   model.Add("input", getCotact);
+      //   model.Add("contact", selectedContact);
+      //   return View["contact.cshtml", model];
+      // };
     }
   }
 }
