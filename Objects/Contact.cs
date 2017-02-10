@@ -7,53 +7,45 @@ namespace AddressBook.Objects
 {
   public class Contact
   {
-    private string _contact;
+    private static List<Contact> _instances = new List<Contact> {};
+    private string _name;
     private int _id;
-    private static List<Contact> _instances = new List<Contact>{};
-    private List<Contact> _entries;
+    private List<ContactInfo> _input;
 
-    public Contact (string contact)
+    public Contact(string contactName)
     {
-      _contact = contact;
+      _name = contactName;
       _instances.Add(this);
       _id = _instances.Count;
-      _entries = new List<Contact>{};
+      _input = new List<ContactInfo>{};
     }
-    public string GetContact()
+    public string GetName()
     {
-      return _contact;
-    }
-    public void SetContact(string newContact)
-    {
-      _contact = newContact;
+      return _name;
     }
     public int GetId()
     {
       return _id;
     }
-    public List<Contact> GetEntries()
+    public List<ContactInfo> GetInfo()
     {
-      return _entries;
+      return _input;
     }
-    public void AddContact(Contact contactInput)
+    public void AddContact(ContactInfo contactInfo)
     {
-      _entries.Add(contactInput);
+      _input.Add(contactInfo);
     }
     public static List<Contact> GetAll()
     {
       return _instances;
     }
-    public static ContactInfo Find(int searcId)
-    {
-      return _instances[searchId-1];
-    }
-    public int GetId()
-    {
-      return _id;
-    }
-    public static void ClearAll()
+    public static void Clear()
     {
       _instances.Clear();
+    }
+    public static Contact Find(int searchId)
+    {
+      return _instances[searchId-1];
     }
   }
 }
