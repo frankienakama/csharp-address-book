@@ -10,34 +10,27 @@ namespace AddressBook
     {
       Get["/"] = _ => {
         var allContacts = Contact.GetAll();
-        return View["index.cshtml", allContacts];
+        return View["index.cshtml"];
+      };
+      Get["/contact/new"] = _ => {
+        return View["new_contact_confirmation.cshtml"];
       };
       Get["/contact/add"] = _ => {
         return View["add_a_new_contact.cshtml"];
       };
-      // Post["/contact/add"] = _ => {
-      //   var addContact = new Contact(Request.Form["new-contact"]);
-      //   return View["new_contact_confirmation.cshtml"];
-      // };
-      Post["/"] = _ => {
+      Post["/contact/add"] = _ => {
         var newContact = new Contact(Request.Form["new-contact"]);
         var allContacts = Contact.GetAll();
-        return View["index.cshtml", allContacts];
+        return View["add_a_new_contact.cshtml", addContact];
       };
       Get["/contact/{id}"] = parameters => {
-        model.Add("contact", selectedContact);
-        model.Add("currentContactInfo", currentContact);
-        return View["index.cshtml", model];
-      };
-      Post["/"] = _ => {
-        List<Contact> currentContact = selectedContact.GetContact();
-        string newContactInfo = Request.Form["new-contact"];
-        Contact newContact = new Contact(newContactInfo);
-        currentContact.Add(newContact);
-        model.Add("contact", currentContact);
-        model.Add("currentContactInfo", selectedContact);
-        return View["index.cshtml"];
-      };
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        var selectedContact = Contact.Find(parameters.id);
+        var selectedContactInfo = selectedContact.GetContactInfo();
+        model.Add("Name", selectedContact);
+        model.Add("Contact Info", selectedContactInfo);
+        return View["contact_info.cshtml"];
+      }
     }
   }
 }
