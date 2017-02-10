@@ -21,16 +21,16 @@ namespace AddressBook
       Post["/contact/add"] = _ => {
         var newContact = new Contact(Request.Form["new-contact"]);
         var allContacts = Contact.GetAll();
-        return View["add_a_new_contact.cshtml", addContact];
+        return View["add_a_new_contact.cshtml", allContacts];
       };
       Get["/contact/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        var selectedContact = Contact.Find(parameters.id);
+        var selectedContact = ContactInfo.Find(parameters.id);
         var selectedContactInfo = selectedContact.GetContactInfo();
-        model.Add("Name", selectedContact);
-        model.Add("Contact Info", selectedContactInfo);
-        return View["contact_info.cshtml"];
-      }
+        model.Add("contactInfo", selectedContact);
+        model.Add("contact", selectedContactInfo);
+        return View["contact_info.cshtml", model];
+      };
     }
   }
 }

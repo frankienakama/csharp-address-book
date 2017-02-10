@@ -39,7 +39,7 @@ namespace AddressBook.Objects
     {
       return _contactInfo;
     }
-    public void AddContact(ContactInfo contactinfo)
+    public void AddContact(ContactInfo contactInfo)
     {
       _contactInfo.Add(contactInfo);
     }
@@ -50,6 +50,10 @@ namespace AddressBook.Objects
     public static void Clear()
     {
       _instances.Clear();
+    }
+    public static ContactInfo Find(int searchId)
+    {
+      return _instances[searchId-1];
     }
   }
 }
