@@ -1,48 +1,65 @@
 
 using Nancy;
 using System.Collections.Generic;
-using AddressBook.Objects;
 
 namespace AddressBook.Objects
 {
-  public class Contact
-  {
-    private static List<Contact> _instances = new List<Contact> {};
-    private string _name;
+  public class Contact{
+    private string _contactName;
+    private string _address;
+    private string _phoneNumber;
     private int _id;
-    private List<ContactInfo> _input;
+    private static List<Contact> _instances = new List<Contact>{};
 
-    public Contact(string contactName)
+    public Contact(string contactName, string contactAddress, string contactPhoneNumber)
     {
-      _name = contactName;
+      _contactName = contactName;
+      _address = contactAddress;
+      _number = contactPhoneNumber;
       _instances.Add(this);
       _id = _instances.Count;
-      _input = new List<ContactInfo>{};
     }
-    public string GetName()
+    public string GetContactName()
     {
-      return _name;
+      return _contactName;
+    }
+    public void SetContactName(string newContactName)
+    {
+      _contactName = newContactName;
+    }
+    public string GetAddress()
+    {
+      return _address;
+    }
+    public void SetAddress(string newAddress)
+    {
+      _address = newAddress;
+    }
+    public string GetPhoneNumber()
+    {
+      return _phoneNumber;
+    }
+    public void SetPhoneNumber(string newPhoneNumber)
+    {
+      _phoneNumber = newPhoneNumber;
     }
     public int GetId()
     {
       return _id;
     }
-    public List<ContactInfo> GetInfo()
-    {
-      return _input;
-    }
-    public void AddContact(ContactInfo contactInfo)
-    {
-      _input.Add(contactInfo);
-    }
+
+//
+
     public static List<Contact> GetAll()
     {
       return _instances;
     }
-    public static void Clear()
+
+    public static void ClearAll()
     {
       _instances.Clear();
     }
+
     public static Contact Find(int searchId)
     {
       return _instances[searchId-1];
