@@ -7,14 +7,14 @@ namespace AddressBook.Objects
 {
   public class ContactInfo
   {
-    private static List<ContactInfo> _instances = new List<Contact> {};
+    private static List<ContactInfo> _instances = new List<ContactInfo> {};
     private string _contactName;
     private string _contactPhoneNumber;
     private string _contactAddress;
     private int _id;
-    private List<Contact> _contactInfo;
+    private List<ContactInfo> _contactInfo;
 
-    public ContactInfo(string contactName)
+    public ContactInfo(string contactName, string contactPhoneNumber, string contactAddress)
     {
       _contactName = contactName;
       _contactPhoneNumber = contactPhoneNumber;
@@ -23,7 +23,6 @@ namespace AddressBook.Objects
       _id = _instances.Count;
       _contactInfo = new List<ContactInfo>{};
     }
-
     public string GetContactName()
     {
       return _contactName;
@@ -44,17 +43,13 @@ namespace AddressBook.Objects
     {
       _contactInfo.Add(contactInfo);
     }
-    public static List<Contact> GetAll()
+    public static List<ContactInfo> GetAll()
     {
       return _instances;
     }
     public static void Clear()
     {
       _instances.Clear();
-    }
-    public static Contact Find(int searchId)
-    {
-      return _instances[searchId-1];
     }
   }
 }
