@@ -35,7 +35,7 @@ namespace AddressBook
       Post["/"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Contact selectedContact = Contact.Find(Request.Form["new-contact"]);
-        List<Contact> currentContact = selectedContact.GetAddressBookEntries();
+        List<Contact> currentContact = selectedContact.GetAddressBookInfo();
         string newContactInfo = Request.Form["new-contact"];
         Contact newContact = new Contact(newContactInfo);
         currentContact.Add(newContact);
