@@ -12,9 +12,9 @@ namespace AddressBook.Objects
     private string _contactPhoneNumber;
     private string _contactAddress;
     private int _id;
-    private List<ContactInfo> _contactInfo;
+    private static List<ContactInfo> _contactInfo = new List<ContactInfo>{};
 
-    public ContactInfo(string contactName, string contactPhoneNumber, string contactAddress)
+    public List<ContactInfo>(string contactName, string contactPhoneNumber, string contactAddress)
     {
       _contactName = contactName;
       _contactPhoneNumber = contactPhoneNumber;
@@ -29,15 +29,11 @@ namespace AddressBook.Objects
     }
     public string GetContactPhoneNumber()
     {
-      return _contactPhoneNumber;
+      return _contactPhoneNumbere;
     }
     public string GetContactAddress()
     {
       return _contactAddress;
-    }
-    public List<ContactInfo> GetContactInfo()
-    {
-      return _contactInfo;
     }
     public void AddContact(ContactInfo contactInfo)
     {
