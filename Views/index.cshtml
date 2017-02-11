@@ -1,11 +1,3 @@
 <h1>Address Book</h1>
-
-@foreach (var contact in Model)
-{
-  <p><a href="/contacts/@contact.GetId()">@contact.GetContactName()</a></p>
-}
-<p><a href="/contact/add">Add a new contact</a></p>
-
-<form action="/contacts/clear" method="post">
-  <button type="submit" name="button">Clear address book</button>
-</form>
+<h3><a href='/contacts'>View contacts</a></h3>
+<h3><a href='/contacts/new'>Add a new contact</a></h3>

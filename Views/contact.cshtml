@@ -1,0 +1,9 @@
+<h3>The most recent contact added:</h3>
+<ol>
+@foreach (var contact in @Model["contacts"])
+{
+  <li>@contact.GetContacts()</li>
+}
+</ol>
+<p><a href='/categories/@Model["contact"].GetId()/contacts/new'>Add a new contact</a></p>
+<p><a href='/'>Return to Main Page</a></p>

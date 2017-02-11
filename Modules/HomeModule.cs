@@ -9,23 +9,46 @@ namespace AddressBook
     public HomeModule()
     {
       Get["/"] = _ => {
-        List<Contact> allContacts = Contact.GetAll();
-        return View["index.cshtml", allContacts];
+          return View["index.cshtml"];
       };
-      Get["/contact/add"] = _ => {
-        return View["add_contact.cshtml"];
+      Get["/contacts"] = _ => {
+        var allContacts = Contact.GetAll();
+        return View["contacts.cshtml", allContacts];
       };
-      Post["/contact/add"] = _ => {
-        Contact newContact = new Contact(Request.Form["add-contact"], Request.Form["add-phoneNumber"], Request.Form["add-address"]);
-        return View["new_contact_confirmation.cshtml", newContact];
+      Get["/contacts/new"] = _ => {
+        return View["contact_form.cshtml"];
+      };
+      Post["/contacts"] = _ => {
+        var newContact = new Contact(Request.Form["contact-name"]);
+        var allContacts = Contact.GetAll();
+        return View["contacts.cshtml", allContacts];
       };
       Get["/contacts/{id}"] = parameters => {
-        Contact contact = Contact.Find(parameters.id);
-        return View["contact_info.cshtml", contact];
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        var selectedContact = Contact.Find(parameters.id);
+        var contactNames = selectedContact.GetNames();
+        model.Add("contact", selectedContact);
+        model.Add("names", contactNames);
+        return View["contact.cshtml", model];
       };
-      Post["/contacts/clear"] = _ => {
-        Contact.ClearAll();
-        return View["cleared.cshtml"];
+      Get["/contacts/{id}/names/new"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Contact selectedContact = Contact.Find(parameters.id);
+        List<Name> allNames = selectedContact.GetNames();
+        model.Add("contact", selectedContact);
+        model.Add("names", allNames);
+        return View["contact_names_form.cshtml", model];
+      };
+      Post["/names"] = _ => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Contact selectedContact = Contact.Find(Request.Form["contact-id"]);
+        List<Name> contactNames = selectedContact.GetNames();
+        string nameDescription = Request.Form["name-description"];
+        Name newName = new Name(nameDescription);
+        contactNames.Add(newName);
+        model.Add("names", contactNames);
+        model.Add("contact", selectedContact);
+        return View["contact.cshtml", model];
       };
     }
   }

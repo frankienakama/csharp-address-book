@@ -2,62 +2,45 @@ using System.Collections.Generic;
 
 namespace AddressBook.Objects
 {
-  public class Contact{
-    private string _contactName;
-    private string _address;
-    private string _phoneNumber;
+  public class Contact
+  {
+    private static List<Contact> _instances = new List<Contact> {};
+    private string _name;
     private int _id;
-    private static List<Contact> _instances = new List<Contact>{};
+    private List<Contact> _contact;
 
-    public Contact(string contactName, string contactAddress, string contactPhoneNumber)
+    public Contact(string contactName)
     {
-      _contactName = contactName;
-      _address = contactAddress;
-      _phoneNumber = contactPhoneNumber;
+      _name = contactName;
       _instances.Add(this);
       _id = _instances.Count;
+      _contact = new List<Contact>{};
     }
-    public string GetContactName()
+
+    public string GetName()
     {
-      return _contactName;
-    }
-    public void SetContactName(string newContactName)
-    {
-      _contactName = newContactName;
-    }
-    public string GetAddress()
-    {
-      return _address;
-    }
-    public void SetAddress(string newAddress)
-    {
-      _address = newAddress;
-    }
-    public string GetPhoneNumber()
-    {
-      return _phoneNumber;
-    }
-    public void SetPhoneNumber(string newPhoneNumber)
-    {
-      _phoneNumber = newPhoneNumber;
+      return _name;
     }
     public int GetId()
     {
       return _id;
     }
-
-////////////////////////////////////////////////////////////
-
+    public List<Contact> GetContacts()
+    {
+      return _contact;
+    }
+    public void AddContact(Contact contact)
+    {
+      _contact.Add(contact);
+    }
     public static List<Contact> GetAll()
     {
       return _instances;
     }
-
-    public static void ClearAll()
+    public static void Clear()
     {
       _instances.Clear();
     }
-
     public static Contact Find(int searchId)
     {
       return _instances[searchId-1];

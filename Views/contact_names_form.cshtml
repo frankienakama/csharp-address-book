@@ -1,0 +1,8 @@
+<h1>Address Book</h1>
+<h3>Add a new person to @Model["contact"].GetName()</h3>
+<form action='/contacts' method='post'>
+  <input id='contact-id' name='contact-id' type='hidden' value='@Model["contact"].GetId()'>
+  <label for='contact-description'>Contact info</label>
+  <input id='contact-description' name='contact-description' type='text'>
+  <button type='submit'>Add contact</button>
+</form>
